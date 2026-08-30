@@ -1,1 +1,309 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080b12">
+<title>Deutsch 3000 — A1 & A2</title>
+<style>
+:root{--bg:#080b12;--panel:#111724;--panel2:#171f2e;--panel3:#0d131e;--text:#f5f7fb;--muted:#9ca9bb;--accent:#7c8cff;--accent2:#54e0c1;--gold:#ffd166;--danger:#ff6b7a;--line:#273246;--success:#59dfbf;--shadow:0 20px 60px rgba(0,0,0,.28)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;background:radial-gradient(circle at 15% 0%,rgba(124,140,255,.15),transparent 30%),radial-gradient(circle at 90% 15%,rgba(84,224,193,.08),transparent 25%),var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.5}button,input,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent2);outline-offset:3px}
+.app{width:min(1180px,calc(100% - 28px));margin:auto;padding:18px 0 40px}header{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:12px 0 24px}.logo{font-size:23px;font-weight:950;letter-spacing:-1px}.logo span{color:var(--accent2)}.stats{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.stat{background:rgba(17,23,36,.9);border:1px solid var(--line);border-radius:13px;padding:8px 12px;font-size:12px;color:var(--muted)}.stat b{color:var(--gold);margin-left:3px}
+.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(124,140,255,.16),rgba(84,224,193,.05)),var(--panel);border:1px solid var(--line);border-radius:28px;padding:34px;box-shadow:var(--shadow)}.badge{display:inline-flex;padding:7px 11px;border-radius:999px;background:rgba(124,140,255,.12);color:#c6ccff;font-size:11px;font-weight:900;letter-spacing:.7px}.hero h1{margin:18px 0 14px;font-size:clamp(38px,7vw,72px);line-height:.94;letter-spacing:-4px}.hero h1 span{color:var(--accent2)}.hero p{max-width:800px;color:var(--muted);font-size:17px;line-height:1.75}.hero-actions,.actions{display:flex;gap:10px;flex-wrap:wrap}.btn{border:0;border-radius:13px;padding:11px 16px;background:var(--accent);color:white;font-weight:850;transition:.15s}.btn:hover{filter:brightness(1.08)}.btn.secondary{background:#222c3d}.btn.green{background:#147d6d}.btn.gold{background:#8b6c22}.btn.danger{background:#662a35}.btn:disabled{opacity:.45;cursor:not-allowed}
+.progress-wrap{margin-top:25px}.progress{height:9px;background:#202a3a;border-radius:99px;overflow:hidden}.progress div{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .45s}.progress-label{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;margin-top:8px}
+section{margin:28px 0}.section-title{display:flex;justify-content:space-between;align-items:end;gap:15px;margin-bottom:14px}.section-title h2{margin:0;font-size:23px}.section-title p{margin:4px 0;color:var(--muted);font-size:13px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}.card{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:21px}.module-card{min-height:220px;display:flex;flex-direction:column;justify-content:space-between;transition:.2s}.module-card:hover{transform:translateY(-3px);border-color:#43516b}.module-number{color:var(--accent2);font-size:10px;font-weight:950;letter-spacing:.8px}.module-icon{font-size:31px;margin-top:7px}.module-card h3{margin:5px 0 7px}.module-card p{color:var(--muted);font-size:13px;line-height:1.6;margin:0 0 16px}.card-bottom{display:flex;justify-content:space-between;align-items:center;gap:10px}.done{color:var(--success);font-size:12px;font-weight:800}
+.status{display:flex;gap:12px;align-items:center}.dot{width:11px;height:11px;border-radius:50%;background:var(--gold);flex:none}.dot.ok{background:var(--success)}.dot.bad{background:var(--danger)}
+.daily{background:linear-gradient(135deg,rgba(255,209,102,.10),rgba(124,140,255,.07)),var(--panel)}.daily-layout{display:flex;justify-content:space-between;align-items:center;gap:20px}.daily-label{color:var(--gold);font-size:10px;font-weight:950;letter-spacing:.8px}.daily h3{margin:7px 0}.daily p{color:var(--muted);font-size:13px;margin:0}
+.lesson{display:none;background:var(--panel);border:1px solid var(--line);border-radius:25px;padding:27px;margin-top:24px;box-shadow:var(--shadow)}.lesson.active{display:block;animation:appear .25s}.lesson-header{display:flex;justify-content:space-between;align-items:flex-start;gap:20px}.lesson-title{margin:8px 0;font-size:31px}.lesson-body{font-size:16px;line-height:1.85}.flash-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:18px}.word-main,.visual-wrap{background:var(--panel3);border:1px solid var(--line);border-radius:18px;padding:22px}.word-de{font-size:52px;font-weight:950;line-height:1;letter-spacing:-2px;margin:8px 0 12px}.ipa{font-family:Georgia,serif;color:#a78bfa;font-size:18px}.translation{font-size:18px;margin-top:8px}.lang-label{display:inline-block;min-width:35px;color:var(--muted);font-size:11px;font-weight:900}.meta-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:15px 0}.meta{background:var(--panel3);border:1px solid var(--line);border-radius:13px;padding:12px}.meta b{display:block;font-size:12px}.meta span{color:var(--muted);font-size:12px}.visual{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:13px;background:#0a0f18;display:block}.visual-fallback{aspect-ratio:4/3;border-radius:13px;display:grid;place-items:center;background:radial-gradient(circle at 50% 35%,rgba(124,140,255,.2),transparent 35%),#0a0f18;font-size:68px}.lesson-actions{display:flex;justify-content:space-between;gap:10px;margin-top:20px}.quiz{margin-top:28px;padding-top:23px;border-top:1px solid var(--line)}.question{font-size:19px;font-weight:900;margin-bottom:14px}.options{display:grid;gap:9px}.option{width:100%;text-align:left;background:#1a2332;color:white;border:1px solid var(--line);border-radius:13px;padding:13px}.option.correct{border-color:var(--success);background:rgba(84,224,193,.1)}.option.wrong{border-color:var(--danger);background:rgba(255,107,122,.09)}.feedback{min-height:25px;margin-top:13px;color:var(--muted);font-size:14px}
+.search-row{display:flex;gap:10px;flex-wrap:wrap;margin:15px 0}.search-row input,.search-row select{flex:1;min-width:220px;background:var(--panel3);color:var(--text);border:1px solid var(--line);border-radius:12px;padding:12px}.words-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.word-card{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:14px;text-align:left;color:var(--text);transition:.15s}.word-card:hover{border-color:#4a5a77;transform:translateY(-2px)}.word-card .de{font-size:20px;font-weight:850}.word-card .en{color:#dbe4f0;margin-top:4px}.word-card .tr{color:var(--muted);font-size:13px}.word-card .ipa{font-size:12px;margin-top:5px}.rank{color:var(--muted);font-size:10px;margin-bottom:7px}.tag{padding:3px 6px;border-radius:6px;background:rgba(124,140,255,.12);color:#c6ccff;font-size:10px;font-weight:900}
+.achievements{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.achievement{display:flex;align-items:center;gap:13px;background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:14px}.achievement.locked{opacity:.4}.achievement-icon{width:44px;height:44px;display:grid;place-items:center;border-radius:13px;background:#202b3d;font-size:21px;flex:none}.achievement h4{margin:0 0 3px}.achievement p{margin:0;color:var(--muted);font-size:11px}
+.toast{position:fixed;right:18px;bottom:18px;z-index:100;max-width:330px;padding:16px;border-radius:16px;background:#151e2c;border:1px solid #34425b;box-shadow:0 20px 60px rgba(0,0,0,.45)}.toast-title{color:var(--gold);font-size:10px;font-weight:950;letter-spacing:.7px}.toast-text{margin-top:3px;font-weight:800}.empty{padding:30px;text-align:center;color:var(--muted);grid-column:1/-1;background:var(--panel3);border:1px solid var(--line);border-radius:15px}
+@keyframes appear{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}@media(max-width:850px){.flash-grid{grid-template-columns:1fr}.words-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:700px){.app{width:min(100% - 18px,1180px)}header{align-items:flex-start;flex-direction:column}.stats{justify-content:flex-start}.hero{padding:24px;border-radius:22px}.hero h1{font-size:46px;letter-spacing:-3px}.lesson{padding:20px}.lesson-header{flex-direction:column}.lesson-title{font-size:27px}.daily-layout{align-items:flex-start;flex-direction:column}.lesson-actions{flex-direction:column}.lesson-actions .btn{width:100%}.words-grid{grid-template-columns:1fr}.word-de{font-size:42px}.meta-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+<div class="logo">DEUTSCH<span>3000</span></div>
+<div class="stats">
+<div class="stat">⭐ XP <b id="xp">0</b></div><div class="stat">🔥 Seri <b id="streak">0</b></div><div class="stat">🏆 Seviye <b id="level">1</b></div><div class="stat">📚 <b id="count">0</b> kelime</div>
+</div>
+</header>
 
+<div class="hero">
+<div class="badge">A1 + A2 + B1 · 6000 KELİME · DE / EN / TR · IPA</div>
+<h1>Almanca'yı<br><span>6000 kelimeyle öğren.</span></h1>
+<p>Gönderdiğin referans uygulamadaki öğrenme laboratuvarı yapısı kullanıldı: modüller, günlük görev, ders ekranı, quiz, XP, seri ve başarılar. Bu sürüm önceki 3000 A1+A2 kelimeyi korur ve bunlara 3000 farklı B1 kelimesi ekler.</p>
+<div class="hero-actions"><button class="btn" onclick="continueLearning()">Öğrenmeye Devam Et →</button><button class="btn secondary" onclick="openLibrary()">Kelime Kütüphanesi</button><button class="btn secondary" onclick="loadData(true)">Veriyi Yenile</button></div>
+<div class="progress-wrap"><div class="progress"><div id="progress"></div></div><div class="progress-label"><span id="progressText">Veri yükleniyor…</span><span id="percent">0%</span></div></div>
+</div>
+
+<section><div class="card status"><div id="dot" class="dot"></div><div><b id="statusTitle">Hazırlanıyor</b><div class="muted" id="statusText">A1+A2 CEFR frekans listesi indiriliyor.</div></div></div></section>
+
+<section><div class="section-title"><div><h2>🗺️ Öğrenme Dünyaları</h2><p>Her dünya kelime grubunu kademeli olarak açar.</p></div></div><div id="modules" class="grid"></div></section>
+
+<section><div class="daily card"><div class="daily-layout"><div><div class="daily-label">BUGÜNÜN MİSYONU</div><h3 id="missionTitle">Bir kelimeyi üç dilde öğren.</h3><p id="missionText">Almancayı oku → İngilizceyi söyle → Türkçesini hatırla → telaffuzu dinle.</p></div><button id="dailyBtn" class="btn green" onclick="dailyMission()" disabled>Veri bekleniyor</button></div></div></section>
+
+<div id="lessonContainer"></div>
+
+<section id="library">
+<div class="section-title"><div><h2>📚 6000 Kelimelik Kütüphane</h2><p>Arama Almanca, İngilizce ve Türkçe alanlarında çalışır. Görsel, kelime kartı açıldığında Wikimedia Commons'tan yüklenir.</p></div></div>
+<div class="card"><div class="search-row"><input id="search" placeholder="Deutsch / English / Türkçe ara…"><select id="filter"><option value="all">A1 + A2</option><option value="A1">A1</option><option value="A2">A2</option></select><button class="btn secondary" onclick="randomWord()">🎲 Rastgele</button></div><div id="wordGrid" class="words-grid"></div></div>
+</section>
+
+<section><div class="section-title"><div><h2>🏅 Başarılar</h2><p>İlerledikçe açılan kilometre taşları.</p></div></div><div id="achievements" class="achievements"></div></section>
+
+<div class="reset-area"><button class="btn danger" onclick="resetProgress()">İlerlemeyi Sıfırla</button></div>
+<footer style="text-align:center;color:#657287;font-size:11px;padding:30px 0">Deutsch 3000 · A1 + A2 + B1 · GitHub Pages uyumlu</footer>
+</div>
+
+<script>
+const SOURCE_A1="https://cdn.jsdelivr.net/gh/Talhakasikci/cefr-vocabulary-dataset@main/vocab_json/de-A1.json";
+const SOURCE_A2="https://cdn.jsdelivr.net/gh/Talhakasikci/cefr-vocabulary-dataset@main/vocab_json/de-A2.json";
+const SOURCE_B1="https://cdn.jsdelivr.net/gh/Talhakasikci/cefr-vocabulary-dataset@main/vocab_json/de-B1.json";
+const FREQ_URL="https://raw.githubusercontent.com/ph98/german-cefr-wordlist/main/data/de_full.txt";
+const TR_URL="https://raw.githubusercontent.com/freedict/fd-dictionaries/master/deu-tur/german-turkish.txt";
+const EN_URL_1="https://raw.githubusercontent.com/coastalcph/MUSE_dicos/master/de-en.0-5000.txt";
+const EN_URL_2="https://raw.githubusercontent.com/coastalcph/MUSE_dicos/master/de-en.5000-6500.txt";
+const CACHE="deutsch6000_words_v6";
+const STATE="deutsch6000_state_v6";
+let WORDS=[],trMap=new Map(),enMap=new Map(),current=0;
+let state=loadState();
+
+function loadState(){
+ try{return JSON.parse(localStorage.getItem(STATE))||{known:[],fav:[],xp:0,streak:0,lastDay:null,daily:null,ach:[]}}
+ catch{return{known:[],fav:[],xp:0,streak:0,lastDay:null,daily:null,ach:[]}}
+}
+function save(){localStorage.setItem(STATE,JSON.stringify(state))}
+function today(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`}
+function gap(a,b){return Math.round((new Date(b+"T12:00:00")-new Date(a+"T12:00:00"))/86400000)}
+function day(){const t=today();if(state.lastDay===t)return;if(!state.lastDay)state.streak=1;else state.streak=gap(state.lastDay,t)===1?state.streak+1:1;state.lastDay=t}
+function level(){return Math.floor(state.xp/100)+1}
+function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[c]))}
+function norm(v){return String(v||"").toLocaleLowerCase("de-DE").replace(/ä/g,"a").replace(/ö/g,"o").replace(/ü/g,"u").replace(/ß/g,"ss").trim()}
+function status(title,text,kind=""){document.getElementById("statusTitle").textContent=title;document.getElementById("statusText").textContent=text;document.getElementById("dot").className="dot "+kind}
+function updateQuality(){
+ const total=WORDS.length||0;
+ const en=WORDS.filter(w=>w.en).length;
+ const tr=WORDS.filter(w=>w.tr).length;
+ const ipa=WORDS.filter(w=>w.ipa).length;
+ const t=document.getElementById("qualityTotal");
+ if(t)t.textContent=`${total} / 6000`;
+ const e=document.getElementById("qualityEn");if(e)e.textContent=total?Math.round(en/total*100)+"%":"0%";
+ const r=document.getElementById("qualityTr");if(r)r.textContent=total?Math.round(tr/total*100)+"%":"0%";
+ const i=document.getElementById("qualityIpa");if(i)i.textContent=total?Math.round(ipa/total*100)+"%":"0%";
+}
+function stats(){
+ document.getElementById("xp").textContent=state.xp;
+ document.getElementById("level").textContent=level();
+ document.getElementById("streak").textContent=state.streak;
+ document.getElementById("count").textContent=WORDS.length;
+ const p=WORDS.length?Math.round(state.known.length/WORDS.length*100):0;
+ document.getElementById("progress").style.width=p+"%";
+ document.getElementById("percent").textContent=p+"%";
+ document.getElementById("progressText").textContent=WORDS.length?`${state.known.length} / ${WORDS.length} kelime öğrenildi`:"Veri yükleniyor…"
+}
+function toast(a,b){document.querySelectorAll(".toast").forEach(x=>x.remove());const t=document.createElement("div");t.className="toast";t.innerHTML=`<div class="toast-title">${esc(a)}</div><div class="toast-text">${esc(b)}</div>`;document.body.appendChild(t);setTimeout(()=>t.remove(),3200)}
+
+function parseTR(text){
+ const map=new Map();
+ for(const line of text.split(/\r?\n/)){
+  if(!line||line.startsWith("#"))continue;
+  const p=line.split("\t");if(p.length<2)continue;
+  const k=norm(p[0]),v=p[1].replace(/\s+/g," ").trim();
+  if(!k||!v)continue;
+  if(!map.has(k))map.set(k,[]);
+  if(!map.get(k).includes(v))map.get(k).push(v);
+ }
+ return map;
+}
+function parseMUSE(text){
+ const map=new Map();
+ for(const raw of text.split(/\r?\n/)){
+  const line=raw.trim();
+  if(!line||line.startsWith("#")) continue;
+  const parts=line.split(/\s+/);
+  if(parts.length<2) continue;
+  const de=parts[0];
+  const en=parts[1];
+  if(!de||!en) continue;
+  const k=norm(de);
+  if(!map.has(k)) map.set(k,[]);
+  if(!map.get(k).includes(en)) map.get(k).push(en);
+ }
+ return map;
+}
+function mergeTranslationMaps(a,b){
+ const out=new Map(a);
+ for(const [k,v] of b){
+  if(!out.has(k))out.set(k,[]);
+  for(const x of v)if(!out.get(k).includes(x))out.get(k).push(x);
+ }
+ return out;
+}
+async function getJSON(u){const r=await fetch(u,{cache:"no-store"});if(!r.ok)throw new Error("HTTP "+r.status);return r.json()}
+async function getText(u){const r=await fetch(u,{cache:"no-store"});if(!r.ok)throw new Error("HTTP "+r.status);return r.text()}
+
+const modules=[
+{id:1,title:"A1 Temeller",icon:"🌱",range:[0,999],desc:"A1'in en sık 1000 kelimesi."},
+{id:2,title:"A1 Günlük Hayat",icon:"🏠",range:[1000,1999],desc:"A1'in ikinci 1000 kelimesi."},
+{id:3,title:"A2 Kelime Gücü",icon:"⚡",range:[2000,2999],desc:"A2'nin 1000 kelimelik çekirdeği."},
+{id:4,title:"B1 Temeller",icon:"🚀",range:[3000,3999],desc:"B1'in ilk 1000 kelimesi."},
+{id:5,title:"B1 Günlük Dil",icon:"🧠",range:[4000,4999],desc:"B1'in ikinci 1000 kelimesi."},
+{id:6,title:"B1 İleri Bağlam",icon:"🏆",range:[5000,5999],desc:"B1'in son 1000 kelimesi."}
+];
+
+async function loadData(force=false){
+ document.getElementById("dailyBtn").disabled=true;
+ try{
+  status("ADIM 1 / 4","A1, A2 ve B1 CEFR listeleri indiriliyor…");
+  const [a1,a2,b1]=await Promise.all([
+   getJSON(SOURCE_A1),getJSON(SOURCE_A2),getJSON(SOURCE_B1)
+  ]);
+
+  status("ADIM 2 / 4","Almanca frekans listesi indiriliyor…");
+  const freqText=await getText(FREQ_URL);
+  const freqMap=new Map();
+  for(const line of freqText.split(/\r?\n/)){
+   const p=line.trim().split(/\s+/);
+   if(p.length>=2){
+    const word=p.slice(0,-1).join(" ").trim();
+    const count=Number(p[p.length-1])||0;
+    if(word) freqMap.set(norm(word),count);
+   }
+  }
+
+  status("ADIM 3 / 4","İngilizce ve Türkçe sözlükler indiriliyor…");
+  const [trText,en1,en2]=await Promise.all([
+   getText(TR_URL), getText(EN_URL_1), getText(EN_URL_2)
+  ]);
+  trMap=parseTR(trText);
+  enMap=mergeTranslationMaps(parseMUSE(en1),parseMUSE(en2));
+
+  function normal(arr,lev){
+   const out=[];
+   for(const x of arr||[]){
+    const w=x?.lemma;
+    if(!w)continue;
+    out.push({
+     key:norm(w),de:w,level:lev,
+     ipa:x.ipa||"",
+     pos:x.pos||"",
+     audio:x.audio_url||"",
+     definition:x.definition_target||""
+    });
+   }
+   return out;
+  }
+
+  const uniqueByKey=(arr)=>{
+   const seen=new Set(),out=[];
+   for(const x of arr){
+    if(!seen.has(x.key)){seen.add(x.key);out.push(x)}
+   }
+   return out;
+  };
+
+  let a12=uniqueByKey(normal(a1,"A1").concat(normal(a2,"A2")));
+  a12.sort((a,b)=>(freqMap.get(b.key)||0)-(freqMap.get(a.key)||0));
+
+  const base=a12.slice(0,3000);
+  if(base.length<3000){
+   throw new Error(`A1+A2 veri kümesinde 3000 benzersiz kelime yok (${base.length}).`);
+  }
+
+  const baseKeys=new Set(base.map(x=>x.key));
+  let b1u=uniqueByKey(normal(b1,"B1")).filter(x=>!baseKeys.has(x.key));
+  b1u.sort((a,b)=>(freqMap.get(b.key)||0)-(freqMap.get(a.key)||0));
+
+  const extra=b1u.slice(0,3000);
+  if(extra.length<3000){
+   throw new Error(`İlk 3000 kelimeden farklı 3000 B1 kelimesi bulunamadı (${extra.length}).`);
+  }
+
+  WORDS=base.concat(extra).map((x,i)=>{
+   const en=enMap.get(x.key)||x.definition||"";
+   const tr=trMap.get(x.key)?.slice(0,5).join(" · ")||"";
+   return {
+    id:`de-6000-${String(i+1).padStart(4,"0")}`,
+    rank:i+1,
+    de:x.de,
+    en,
+    tr,
+    ipa:x.ipa||"",
+    audio:x.audio||"",
+    level:x.level,
+    pos:x.pos||"",
+    frequency:freqMap.get(x.key)||0,
+    imageQuery:`${en||x.de} ${x.de}`
+   };
+  });
+
+  localStorage.setItem(CACHE,JSON.stringify(WORDS));
+  renderAll();
+  stats();
+
+  const a1c=WORDS.filter(x=>x.level==="A1").length;
+  const a2c=WORDS.filter(x=>x.level==="A2").length;
+  const b1c=WORDS.filter(x=>x.level==="B1").length;
+  const enc=WORDS.filter(x=>x.en).length;
+  const trc=WORDS.filter(x=>x.tr).length;
+  const ipac=WORDS.filter(x=>x.ipa).length;
+
+  status(
+   "6000 KELİME HAZIR ✓",
+   `Toplam ${WORDS.length} · A1 ${a1c} · A2 ${a2c} · B1 ${b1c} · EN ${enc}/6000 · TR ${trc}/6000 · IPA ${ipac}/6000`,
+   "ok"
+  );
+  if(WORDS.length!==6000){
+   status("VERİ UYARISI",`${WORDS.length} kayıt üretildi; hedef 6000. Veri uydurulmadı.`,"bad");
+  }
+  enableDaily();
+ }catch(e){
+  const c=localStorage.getItem(CACHE);
+  if(c){
+   try{
+    const cached=JSON.parse(c);
+    if(Array.isArray(cached)&&cached.length===6000){
+     WORDS=cached;renderAll();stats();
+     status("ÖNBELLEKTEN HAZIR","6000 kelime yerel önbellekten yüklendi.","ok");
+     enableDaily();
+     return;
+    }
+   }catch{}
+  }
+  status("VERİ HATASI",`${e.message} Tarayıcıda internet/CDN erişimini kontrol et.`,"bad");
+ }
+}
+function isUnlocked(i){return i===0||state.known.length>=modules[i-1].range[1]+1}
+function enableDaily(){const done=state.daily===today();document.getElementById("dailyBtn").disabled=!WORDS.length||done;document.getElementById("dailyBtn").textContent=done?"✓ Tamamlandı":WORDS.length?"Görevi Yap":"Veri bekleniyor"}
+
+function renderModules(){document.getElementById("modules").innerHTML=modules.map((m,i)=>`<div class="module-card card"><div><div class="module-number">DÜNYA ${m.id}</div><div class="module-icon">${m.icon}</div><h3>${m.title}</h3><p>${m.desc}</p></div><div class="card-bottom"><span class="done">${WORDS.length?Math.max(0,Math.min(m.range[1]+1,WORDS.length)-m.range[0]):0} kelime</span><button class="btn" onclick="openModule(${i})">Keşfet →</button></div></div>`).join("")}
+function openModule(i){if(!WORDS.length)return;current=Math.min(modules[i].range[0],WORDS.length-1);renderLesson(i)}
+function renderLesson(mi){const w=WORDS[current],m=modules[mi];document.getElementById("lessonContainer").innerHTML=`<div class="lesson active"><div class="lesson-header"><div><div class="module-number">DÜNYA ${m.id} · ${m.icon} ${m.title.toUpperCase()}</div><h2 class="lesson-title">Kelime Laboratuvarı</h2><span class="tag">${w.level}</span></div><button class="btn secondary" onclick="closeLesson()">Kapat</button></div><div class="lesson-body"><div class="flash-grid"><div class="word-main" id="wordMain"></div><div class="visual-wrap" id="visualWrap"></div></div><div class="quiz"><div class="question">🧩 Türkçe karşılığını seç.</div><div class="options" id="quizOptions"></div><div class="feedback" id="feedback"></div></div><div class="lesson-actions"><button class="btn secondary" onclick="previousWord()">← Önceki</button><button class="btn" onclick="markKnown()">✓ Öğrendim</button><button class="btn green" onclick="nextWord()">Sonraki →</button></div></div></div>`;showWord();quiz();document.getElementById("lessonContainer").scrollIntoView({behavior:"smooth",block:"start"})}
+function showWord(){const w=WORDS[current],fav=state.fav.includes(current),known=state.known.includes(current);document.getElementById("wordMain").innerHTML=`<div class="rank">#${w.rank} · <span class="tag">${w.level}</span></div><div class="word-de">${esc(w.de)}</div><div class="ipa">/${esc(w.ipa||"Telaffuz için ses düğmesini kullan")}/</div><div class="translation"><span class="lang-label">EN</span> ${esc(w.en||"Çeviri hazırlanıyor")}</div><div class="translation"><span class="lang-label">TR</span> ${esc(w.tr||"Çeviri hazırlanıyor")}</div><div class="meta-grid"><div class="meta"><b>Frekans</b><span>${Number(w.frequency).toLocaleString("tr-TR")}</span></div><div class="meta"><b>Durum</b><span>${known?"Öğrenildi":"Henüz değil"}</span></div><div class="meta"><b>Seviye</b><span>${w.level}</span></div></div><p><b>Örnek:</b> ${esc(w.exampleDe||"Bu kelime için kısa örnek cümle eklenebilir.")}</p><div class="actions"><button class="btn" onclick='speak(${JSON.stringify(w.de)})'>🔊 Dinle</button><button class="btn secondary" onclick="toggleFav()">${fav?"★ Favoriden çıkar":"☆ Favoriye ekle"}</button></div>`;loadImage(w)}
+async function loadImage(w){const box=document.getElementById("visualWrap");if(!box)return;box.innerHTML=`<div class="module-number">GÖRSEL · WIKIMEDIA COMMONS</div><div class="visual-fallback">⏳</div>`;try{const q=encodeURIComponent((w.en||w.de)+" "+w.de);const r=await fetch(`https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrsearch=${q}&gsrnamespace=6&gsrlimit=1&prop=imageinfo&iiprop=url&format=json&origin=*`);const j=await r.json(),p=j.query&&Object.values(j.query.pages||{})[0],url=p?.imageinfo?.[0]?.url;if(url)box.innerHTML=`<div class="module-number">GÖRSEL · WIKIMEDIA COMMONS</div><img class="visual" src="${esc(url)}" alt="${esc(w.de)}" loading="lazy">`;else box.innerHTML=`<div class="module-number">GÖRSEL</div><div class="visual-fallback">🇩🇪</div>`}catch{box.innerHTML=`<div class="module-number">GÖRSEL</div><div class="visual-fallback">🇩🇪</div>`}}
+function quiz(){const set=[current];while(set.length<4){const x=Math.floor(Math.random()*WORDS.length);if(!set.includes(x)&&WORDS[x].tr)set.push(x)}if(set.length<4){document.getElementById("quizOptions").innerHTML="Türkçe sözlük verisi bu kelime için yükleniyor.";return}set.sort(()=>Math.random()-.5);document.getElementById("quizOptions").innerHTML=set.map(x=>`<button class="option" onclick="answerQuiz(${x},${current})">${esc(WORDS[x].tr)}</button>`).join("")}
+function answerQuiz(g,c){const bs=document.querySelectorAll("#quizOptions .option"),fb=document.getElementById("feedback");bs.forEach(b=>b.disabled=true);if(g===c){[...bs].find(b=>b.textContent===WORDS[g].tr)?.classList.add("correct");day();if(!state.known.includes(c))state.known.push(c);state.xp+=5;save();stats();fb.innerHTML="✅ Doğru. "+esc(WORDS[c].de)+" = "+esc(WORDS[c].tr);checkAchievements()}else{[...bs].find(b=>b.textContent===WORDS[g].tr)?.classList.add("wrong");fb.innerHTML="🧠 Doğru cevap: <b>"+esc(WORDS[c].tr)+"</b>";setTimeout(quiz,800)}}
+function nextWord(){current=(current+1)%WORDS.length;showWord();quiz()}function previousWord(){current=(current-1+WORDS.length)%WORDS.length;showWord();quiz()}
+function markKnown(){if(!state.known.includes(current)){state.known.push(current);day();state.xp+=3;save();stats();checkAchievements();showWord();toast("KELİME ÖĞRENİLDİ","+"+3+" XP")}else toast("ZATEN ÖĞRENİLDİ","Bu kelime daha önce işaretlenmiş.")}
+function toggleFav(){const p=state.fav.indexOf(current);if(p>=0)state.fav.splice(p,1);else state.fav.push(current);save();showWord()}
+function speak(t){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang="de-DE";u.rate=.82;speechSynthesis.speak(u)}
+function continueLearning(){if(!WORDS.length)return;const i=WORDS.findIndex((w,i)=>!state.known.includes(i));current=i<0?0:i;openModule(modules.findIndex(m=>current>=m.range[0]&&current<=m.range[1]))}
+function dailyMission(){if(!WORDS.length||state.daily===today())return;const i=(new Date().getDate()-1)%WORDS.length;current=i;state.daily=today();if(!state.known.includes(i))state.known.push(i);day();state.xp+=15;save();stats();checkAchievements();showWordIfOpen();document.getElementById("missionTitle").textContent="Görev tamamlandı ✓";document.getElementById("missionText").textContent=`${WORDS[i].de} → ${WORDS[i].en||"English"} → ${WORDS[i].tr||"Türkçe"}`;document.getElementById("dailyBtn").disabled=true;document.getElementById("dailyBtn").textContent="✓ Tamamlandı";toast("GÜNLÜK GÖREV","+"+15+" XP")}
+function showWordIfOpen(){if(document.querySelector(".lesson.active"))showWord()}
+function openLibrary(){document.getElementById("library").scrollIntoView({behavior:"smooth"});document.getElementById("search").focus()}
+function randomWord(){if(!WORDS.length)return;current=Math.floor(Math.random()*WORDS.length);const i=modules.findIndex(m=>current>=m.range[0]&&current<=m.range[1]);openModule(Math.max(0,i))}
+function renderLibrary(){const q=document.getElementById("search").value.trim().toLocaleLowerCase("tr-TR"),lv=document.getElementById("filter").value;const a=WORDS.map((w,i)=>({w,i})).filter(x=>(lv==="all"||x.w.level===lv)&&(!q||(x.w.de+" "+x.w.en+" "+x.w.tr).toLocaleLowerCase("tr-TR").includes(q))).slice(0,300);document.getElementById("wordGrid").innerHTML=a.length?a.map(x=>`<button class="word-card" onclick="current=${x.i};randomWordOpen(${x.i})"><div class="rank">#${x.w.rank} · <span class="tag">${x.w.level}</span></div><div class="de">${esc(x.w.de)}</div><div class="ipa">/${esc(x.w.ipa||"—")}/</div><div class="en">🇬🇧 ${esc(x.w.en||"—")}</div><div class="tr">🇹🇷 ${esc(x.w.tr||"—")}</div></button>`).join(""):'<div class="empty">Sonuç bulunamadı.</div>'}
+function randomWordOpen(i){current=i;const mi=modules.findIndex(m=>i>=m.range[0]&&i<=m.range[1]);openModule(Math.max(0,mi))}
+function renderAchievements(){const ds=[["10","🌱","İlk 10","10 kelime öğren."],["100","📚","Kelime Kurucusu","100 kelime öğren."],["1000","🚀","A1 Ustası","1000 kelime öğren."],["3000","⚡","A2 Ustası","3000 kelime öğren."],["6000","🏆","B1 Ustası","6000 kelime öğren."]];document.getElementById("achievements").innerHTML=ds.map(x=>{const ok=state.known.length>=Number(x[0]);return `<div class="achievement ${ok?"":"locked"}"><div class="achievement-icon">${x[1]}</div><div><h4>${ok?"✓ ":""}${x[2]}</h4><p>${x[3]}</p></div></div>`}).join("")}
+function checkAchievements(){renderAchievements();save()}
+function renderAll(){renderModules();renderLibrary();renderAchievements();enableDaily();stats()}
+function enableDaily(){const done=state.daily===today();document.getElementById("dailyBtn").disabled=!WORDS.length||done;document.getElementById("dailyBtn").textContent=done?"✓ Tamamlandı":WORDS.length?"Görevi Yap":"Veri bekleniyor"}
+function closeLesson(){document.getElementById("lessonContainer").innerHTML=""}
+function resetProgress(){if(!confirm("Tüm öğrenme ilerlemesi, favoriler, XP ve seri silinsin mi?"))return;state={known:[],fav:[],xp:0,streak:0,lastDay:null,daily:null,ach:[]};save();renderAll();closeLesson();toast("SIFIRLANDI","Yeni öğrenme yolculuğu başladı.")}
+document.getElementById("search").oninput=renderLibrary;document.getElementById("filter").onchange=renderLibrary;
+loadData(false);
+</script>
+</body>
+</html>
