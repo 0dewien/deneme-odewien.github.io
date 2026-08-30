@@ -7,16 +7,32 @@
 
 <style>
 body {
-  font-family: Arial;
+  font-family: Arial, sans-serif;
   background: #0b1220;
-  color: #fff;
+  color: white;
   text-align: center;
   padding: 40px;
 }
 
 h1 {
-  font-size: 40px;
   color: #4ade80;
+}
+
+input {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  width: 220px;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  background: #6366f1;
+  color: white;
+  cursor: pointer;
+  margin-left: 10px;
 }
 
 .card {
@@ -27,23 +43,6 @@ h1 {
   display: inline-block;
   width: 300px;
 }
-
-button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 10px;
-  background: #6366f1;
-  color: white;
-  cursor: pointer;
-}
-
-input {
-  padding: 10px;
-  border-radius: 10px;
-  border: none;
-  width: 200px;
-}
 </style>
 </head>
 
@@ -52,17 +51,15 @@ input {
 <h1>DEUTSCH6000</h1>
 <p>6000 KELİME HAZIR ✓</p>
 
-<input id="search" placeholder="Kelime ara...">
-<br>
+<input id="search" placeholder="Kelime yaz (örn: Haus)">
 <button onclick="searchWord()">Ara</button>
 
 <div class="card" id="result">
-Kelime arayın
+Henüz arama yapılmadı
 </div>
 
 <script>
 
-// 🔥 DEMO VERİ (çalıştığını görmek için)
 const words = [
   {de:"Haus", en:"house", tr:"ev"},
   {de:"Hund", en:"dog", tr:"köpek"},
@@ -73,9 +70,9 @@ const words = [
 
 function searchWord() {
   const input = document.getElementById("search").value.toLowerCase();
-  const found = words.find(w => w.de.toLowerCase() === input);
-
   const result = document.getElementById("result");
+
+  const found = words.find(w => w.de.toLowerCase() === input);
 
   if(found){
     result.innerHTML = `
