@@ -1,0 +1,5 @@
+Haus,house,ev
+Hund,dog,köpek
+Katze,cat,kedi
+Buch,book,kitap
+Wasser,water,su
