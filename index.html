@@ -2,6 +2,7 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Akıllı Görsel Sözlük</title>
 
 <style>
@@ -10,15 +11,22 @@ body {
     color:white;
     font-family:Arial;
     text-align:center;
+    margin:0;
+}
+
+h1 {
+    margin-top:30px;
 }
 
 input {
     padding:15px;
-    width:300px;
-    border-radius:10px;
+    width:320px;
+    max-width:90%;
+    border-radius:12px;
     border:none;
     font-size:18px;
-    margin-top:40px;
+    margin-top:30px;
+    outline:none;
 }
 
 #results {
@@ -27,6 +35,7 @@ input {
     flex-wrap:wrap;
     justify-content:center;
     gap:20px;
+    padding:20px;
 }
 
 .card {
@@ -34,12 +43,22 @@ input {
     padding:15px;
     border-radius:12px;
     width:200px;
+    transition:0.2s;
+}
+
+.card:hover {
+    transform:scale(1.05);
 }
 
 .card img {
     width:100%;
     border-radius:10px;
     margin-top:10px;
+}
+
+.empty {
+    opacity:0.6;
+    margin-top:20px;
 }
 </style>
 </head>
@@ -54,49 +73,61 @@ input {
 
 <script>
 let words = [];
-
-// words.txt yükle
-fetch("words.txt")
-.then(res => res.text())
-.then(data => {
-    words = data.split("\n").map(line => {
-        let parts = line.split(",");
-        return {
-            de: parts[0],
-            en: parts[1],
-            tr: parts[2]
-        };
-    });
-});
-
-// elementler
 const input = document.getElementById("search");
 const results = document.getElementById("results");
 
-// yazarken arama
+// DATA YÜKLE
+fetch("words.txt")
+.then(res => res.text())
+.then(data => {
+    words = data.split("\n")
+        .filter(line => line.trim() !== "")
+        .map(line => {
+            const parts = line.split(",");
+            return {
+                de: parts[0]?.trim() || "",
+                en: parts[1]?.trim() || "",
+                tr: parts[2]?.trim() || ""
+            };
+        });
+})
+.catch(err => {
+    results.innerHTML = "<div class='empty'>⚠️ words.txt yüklenemedi</div>";
+    console.error(err);
+});
+
+// ARAMA
 input.addEventListener("input", () => {
-    let val = input.value.toLowerCase();
+    const val = input.value.toLowerCase().trim();
     results.innerHTML = "";
 
-    if(val.length < 1) return;
+    if (val.length === 0) {
+        results.innerHTML = "<div class='empty'>Kelime yazmaya başla...</div>";
+        return;
+    }
 
-    let filtered = words.filter(w =>
-        w.de.toLowerCase().includes(val) ||
-        w.en.toLowerCase().includes(val) ||
-        w.tr.toLowerCase().includes(val)
-    ).slice(0, 6);
+    const filtered = words.filter(w =>
+        (w.de && w.de.toLowerCase().includes(val)) ||
+        (w.en && w.en.toLowerCase().includes(val)) ||
+        (w.tr && w.tr.toLowerCase().includes(val))
+    ).slice(0, 8);
+
+    if (filtered.length === 0) {
+        results.innerHTML = "<div class='empty'>Sonuç bulunamadı</div>";
+        return;
+    }
 
     filtered.forEach(w => {
-        let div = document.createElement("div");
+        const div = document.createElement("div");
         div.className = "card";
 
-        let img = `https://source.unsplash.com/300x200/?${w.en}`;
+        const img = `https://source.unsplash.com/300x200/?${encodeURIComponent(w.en)}&sig=${Math.random()}`;
 
         div.innerHTML = `
             <b>${w.de}</b><br>
             🇬🇧 ${w.en}<br>
             🇹🇷 ${w.tr}
-            <img src="${img}">
+            <img src="${img}" loading="lazy">
         `;
 
         results.appendChild(div);
