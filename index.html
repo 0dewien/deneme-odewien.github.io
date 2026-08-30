@@ -2,7 +2,7 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<title>Deutsch6000 AI</title>
+<title>Akıllı Görsel Sözlük</title>
 
 <style>
 body {
@@ -18,26 +18,25 @@ input {
     border-radius:10px;
     border:none;
     font-size:18px;
+    margin-top:40px;
 }
 
-#suggestions {
-    margin-top:20px;
+#results {
+    margin-top:30px;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:20px;
 }
 
 .card {
     background:#1e293b;
     padding:15px;
-    margin:10px auto;
-    width:300px;
     border-radius:12px;
-    cursor:pointer;
+    width:200px;
 }
 
-.card:hover {
-    background:#334155;
-}
-
-img {
+.card img {
     width:100%;
     border-radius:10px;
     margin-top:10px;
@@ -47,17 +46,16 @@ img {
 
 <body>
 
-<h1>DEUTSCH6000 🔥</h1>
-<p>Yazmaya başla → görsel + anlam gelsin</p>
+<h1>🧠 Akıllı Görsel Sözlük</h1>
 
-<input id="search" placeholder="Kelime yaz...">
+<input type="text" id="search" placeholder="Kelime yaz...">
 
-<div id="suggestions"></div>
+<div id="results"></div>
 
 <script>
 let words = [];
 
-// words.txt dosyasını çek
+// words.txt yükle
 fetch("words.txt")
 .then(res => res.text())
 .then(data => {
@@ -71,33 +69,37 @@ fetch("words.txt")
     });
 });
 
+// elementler
 const input = document.getElementById("search");
-const box = document.getElementById("suggestions");
+const results = document.getElementById("results");
 
+// yazarken arama
 input.addEventListener("input", () => {
     let val = input.value.toLowerCase();
-    box.innerHTML = "";
+    results.innerHTML = "";
 
     if(val.length < 1) return;
 
-    let filtered = words.filter(w => 
+    let filtered = words.filter(w =>
         w.de.toLowerCase().includes(val) ||
         w.en.toLowerCase().includes(val) ||
         w.tr.toLowerCase().includes(val)
-    ).slice(0,5);
+    ).slice(0, 6);
 
     filtered.forEach(w => {
         let div = document.createElement("div");
         div.className = "card";
 
+        let img = `https://source.unsplash.com/300x200/?${w.en}`;
+
         div.innerHTML = `
             <b>${w.de}</b><br>
-            🇬🇧 ${w.en} <br>
+            🇬🇧 ${w.en}<br>
             🇹🇷 ${w.tr}
-            <img src="https://source.unsplash.com/300x200/?${w.en}">
+            <img src="${img}">
         `;
 
-        box.appendChild(div);
+        results.appendChild(div);
     });
 });
 </script>
