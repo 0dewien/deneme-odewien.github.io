@@ -2,46 +2,41 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DEUTSCH6000</title>
+<title>Deutsch6000</title>
 
 <style>
 body {
-  font-family: Arial, sans-serif;
   background: #0b1220;
   color: white;
+  font-family: Arial;
   text-align: center;
   padding: 40px;
 }
 
-h1 {
-  color: #4ade80;
-}
-
 input {
-  padding: 10px;
+  padding: 12px;
   border-radius: 10px;
   border: none;
-  width: 220px;
-}
-
-button {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 10px;
-  background: #6366f1;
-  color: white;
-  cursor: pointer;
-  margin-left: 10px;
-}
-
-.card {
-  margin-top: 30px;
-  padding: 20px;
-  background: #111827;
-  border-radius: 15px;
-  display: inline-block;
   width: 300px;
+}
+
+#results {
+  margin-top: 15px;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  background: #111;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.result {
+  padding: 10px;
+  border-bottom: 1px solid #222;
+}
+
+.result:hover {
+  background: #222;
 }
 </style>
 </head>
@@ -49,42 +44,46 @@ button {
 <body>
 
 <h1>DEUTSCH6000</h1>
-<p>6000 KELİME HAZIR ✓</p>
 
-<input id="search" placeholder="Kelime yaz (örn: Haus)">
-<button onclick="searchWord()">Ara</button>
+<input type="text" id="search" placeholder="Kelime yaz (Haus)">
 
-<div class="card" id="result">
-Henüz arama yapılmadı
-</div>
+<div id="results"></div>
 
 <script>
+let words = [];
 
-const words = [
-  {de:"Haus", en:"house", tr:"ev"},
-  {de:"Hund", en:"dog", tr:"köpek"},
-  {de:"Katze", en:"cat", tr:"kedi"},
-  {de:"Buch", en:"book", tr:"kitap"},
-  {de:"Wasser", en:"water", tr:"su"}
-];
+// VERİYİ YÜKLE
+fetch("words.txt")
+  .then(res => res.text())
+  .then(text => {
+    words = text.split("\n").map(line => {
+      let [de, en, tr] = line.split(",");
+      return { de, en, tr };
+    });
+  });
 
-function searchWord() {
-  const input = document.getElementById("search").value.toLowerCase();
-  const result = document.getElementById("result");
+// CANLI ARAMA
+document.getElementById("search").addEventListener("input", function () {
+  const value = this.value.toLowerCase();
+  const resultsDiv = document.getElementById("results");
 
-  const found = words.find(w => w.de.toLowerCase() === input);
+  resultsDiv.innerHTML = "";
 
-  if(found){
-    result.innerHTML = `
-      <h2>${found.de}</h2>
-      <p>EN: ${found.en}</p>
-      <p>TR: ${found.tr}</p>
-    `;
-  } else {
-    result.innerHTML = "Kelime bulunamadı";
-  }
-}
+  if (!value) return;
 
+  const filtered = words.filter(w =>
+    w.de.toLowerCase().includes(value) ||
+    w.en.toLowerCase().includes(value) ||
+    w.tr.toLowerCase().includes(value)
+  );
+
+  filtered.slice(0, 10).forEach(w => {
+    const div = document.createElement("div");
+    div.className = "result";
+    div.innerHTML = `<b>${w.de}</b> → ${w.en} → ${w.tr}`;
+    resultsDiv.appendChild(div);
+  });
+});
 </script>
 
 </body>
